@@ -1,0 +1,102 @@
+:root {
+    --color-principal: #1e3a5f;
+    --color-secundario: #90a4ae;
+    --color-fondo: #f4f6f8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: var(--color-fondo);
+    color: #2c2c2c;
+}
+
+/* Encabezado */
+.encabezado {
+    background-color: var(--color-principal);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.encabezado h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.encabezado p {
+    font-size: 1rem;
+    color: #cfd8dc;
+}
+
+/* Contenedor */
+.contenedor-practicas {
+    padding: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 26px;
+}
+
+/* Tarjetas */
+.practica-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e3e7;
+    border-radius: 6px;
+    width: 300px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Línea superior */
+.practica-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--color-principal);
+}
+
+.practica-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+}
+
+.practica-card h2 {
+    font-size: 1.1rem;
+    color: var(--color-principal);
+    margin-bottom: 10px;
+}
+
+.practica-card p {
+    font-size: 0.95rem;
+    color: #455a64;
+    margin-bottom: 20px;
+}
+
+/* Botón */
+.btn-ver {
+    margin-top: auto;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: var(--color-principal);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-ver:hover {
+    background-color: #162c48;
+}
