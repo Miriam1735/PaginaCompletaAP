@@ -1,40 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica DummyJson</title>
+    <title>ShopMaster - Dashboard</title>
     <link rel="stylesheet" href="style.css">
+
+    <div class="top-actions">
+        <!-- Botón para regresar a página principal -->
+        <a href="../index.html" class="btn btn-principal">Página Principal</a>
+    </div>
 </head>
-<body>
+    <body>
 
-    <a href="../index.html" class="btn-inicio">
-    ⬅ Regresar al inicio
-    </a>
+    <header class="barra">
+        <div>
+            <h1>Panel de Administración</h1>
 
+            <div class="acciones">
+                <input type="text" id="buscador" placeholder="Buscar producto y Enter">
 
-<header class="barra-busqueda">
-    <h1>Catálogo de Productos</h1>
+                <select id="categorias">
+                    <option value="">Todas las categorías</option>
+                </select>
+            </div>
+        </div>
 
-    <div class="buscador">
-        <span class="icono-lupa">🔍</span>
-        <input 
-            type="text" 
-            id="buscador"
-            placeholder="Buscar producto..."
-        >
-    </div>
-</header>
+        <div class="top-actions">
+            <a href="nuevo.html" class="btn">+ Nuevo Producto</a>
+        </div>
+    </header>
 
-<main class="contenedor-productos" id="contenedor-productos"></main>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Imagen</th>
+                    <th>Título</th>
+                    <th>Precio</th>
+                    <th>Categoría</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-productos"></tbody>
+        </table>
+    </main>
 
-<div class="modal" id="modal">
-    <div class="modal-contenido">
-        <span class="cerrar" id="cerrar">&times;</span>
-        <div id="detalle-producto"></div>
-    </div>
-</div>
+    <footer class="paginacion">
+        <button id="anterior">Anterior</button>
+        <span id="info-pagina"></span>
+        <button id="siguiente">Siguiente</button>
+    </footer>
 
-<script src="main.js"></script>
-</body>
+    <script src="main.js"></script>
+    </body>
 </html>

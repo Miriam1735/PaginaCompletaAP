@@ -34,7 +34,6 @@ body {
     color: #cfd8dc;
 }
 
-/* Contenedor */
 .contenedor-practicas {
     padding: 40px;
     display: flex;
@@ -43,7 +42,6 @@ body {
     gap: 26px;
 }
 
-/* Tarjetas */
 .practica-card {
     background-color: #ffffff;
     border: 1px solid #e0e3e7;
@@ -56,7 +54,6 @@ body {
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Línea superior */
 .practica-card::before {
     content: "";
     position: absolute;

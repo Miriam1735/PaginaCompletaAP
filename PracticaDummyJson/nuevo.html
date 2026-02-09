@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Producto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="barra">
+    <h1>Crear Producto</h1>
+
+    <div class="top-actions">
+        <a href="index.html" class="btn">Inicio</a>
+    </div>
+
+     <div class="top-actions">
+        <!-- Botón para regresar a página principal -->
+        <a href="../index.html" class="btn btn-principal">Página Principal</a>
+    </div>
+</header>
+
+<main class="formulario">
+    <form id="form-producto">
+        <input type="text" id="titulo" placeholder="Título" required>
+        <input type="number" id="precio" placeholder="Precio" required>
+        <input type="text" id="categoria" placeholder="Categoría" required>
+        <input type="text" id="imagen" placeholder="URL imagen">
+
+        <button type="submit">Guardar</button>
+    </form>
+</main>
+
+<script src="nuevo.js"></script>
+</body>
+</html>

@@ -1,64 +1,104 @@
-const contenedor = document.getElementById("contenedor-productos");
+const tabla = document.getElementById("tabla-productos");
 const buscador = document.getElementById("buscador");
-const modal = document.getElementById("modal");
-const detalleProducto = document.getElementById("detalle-producto");
-const cerrar = document.getElementById("cerrar");
+const categoriasSelect = document.getElementById("categorias");
+const anteriorBtn = document.getElementById("anterior");
+const siguienteBtn = document.getElementById("siguiente");
+const infoPagina = document.getElementById("info-pagina");
 
-let productos = [];
+let limit = 10;
+let skip = 0;
+let total = 0;
+let textoBusqueda = "";
+let categoriaActual = "";
+let modoBusqueda = false;
 
-//Obtener productos 
-fetch("https://dummyjson.com/products")
-    .then(res => res.json())
-    .then(data => {
-        productos = data.products;
-        mostrarProductos(productos.slice(0, 9));
-    });
+function cargarProductos() {
+    let url = `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
 
-// Mostrar productos 
-function mostrarProductos(lista) {
-    contenedor.innerHTML = "";
+    if (modoBusqueda) {
+        url = `https://dummyjson.com/products/search?q=${textoBusqueda}`;
+    }
 
-    lista.forEach(producto => {
-        const card = document.createElement("div");
-        card.classList.add("card");
+    if (categoriaActual) {
+        url = `https://dummyjson.com/products/category/${categoriaActual}`;
+    }
 
-        card.innerHTML = `
-            <h3>${producto.title}</h3>
-            <img src="${producto.thumbnail}">
-            <span><strong>Precio:</strong> $${producto.price}</span>
-            <span><strong>Categoría:</strong> ${producto.category}</span>
-            <span><strong>Rating:</strong> ${producto.rating}</span>
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            total = data.total || data.products.length;
+            renderizarTabla(data.products.slice(0, limit));
+            actualizarPaginacion();
+        });
+}
+
+function renderizarTabla(productos) {
+    tabla.innerHTML = "";
+
+    productos.forEach(p => {
+        const fila = document.createElement("tr");
+
+        fila.innerHTML = `
+            <td>${p.id}</td>
+            <td><img src="${p.thumbnail}"></td>
+            <td>${p.title}</td>
+            <td>$${p.price}</td>
+            <td>${p.category}</td>
+            <td>
+                <a href="editar.html?id=${p.id}" class="editar">Editar</a>
+                <button class="eliminar">Eliminar</button>
+            </td>
         `;
 
-        card.addEventListener("click", () => mostrarDetalle(producto));
-        contenedor.appendChild(card);
+        fila.querySelector(".eliminar")
+            .addEventListener("click", () => eliminarProducto(p.id, fila));
+
+        tabla.appendChild(fila);
     });
 }
 
-//Busqueda
-buscador.addEventListener("input", () => {
-    const texto = buscador.value.toLowerCase();
+function eliminarProducto(id, fila) {
+    if (!confirm("¿Eliminar este producto?")) return;
 
-    const filtrados = productos.filter(p =>
-        p.title.toLowerCase().includes(texto)
-    );
-
-    mostrarProductos(filtrados.slice(0, 9));
-});
-
-function mostrarDetalle(producto) {
-    detalleProducto.innerHTML = `
-        <h2>${producto.title}</h2>
-        <img src="${producto.thumbnail}" style="width:100%; height:200px; object-fit:contain">
-        <p>${producto.description}</p>
-        <p><strong>Precio:</strong> $${producto.price}</p>
-        <p><strong>Descuento:</strong> ${producto.discountPercentage}%</p>
-        <p><strong>Stock:</strong> ${producto.stock}</p>
-        <p><strong>Rating:</strong> ${producto.rating}</p>
-    `;
-    modal.style.display = "flex";
+    fetch(`https://dummyjson.com/products/${id}`, { method: "DELETE" })
+        .then(res => res.json())
+        .then(() => fila.remove());
 }
 
-cerrar.addEventListener("click", () => {
-    modal.style.display = "none";
+function actualizarPaginacion() {
+    const pagina = Math.floor(skip / limit) + 1;
+    infoPagina.textContent = `Página ${pagina}`;
+}
+
+anteriorBtn.onclick = () => { skip -= limit; cargarProductos(); };
+siguienteBtn.onclick = () => { skip += limit; cargarProductos(); };
+
+buscador.addEventListener("keypress", e => {
+    if (e.key === "Enter") {
+        textoBusqueda = buscador.value.trim();
+        modoBusqueda = textoBusqueda !== "";
+        categoriaActual = "";
+        skip = 0;
+        cargarProductos();
+    }
 });
+
+fetch("https://dummyjson.com/products/category-list")
+    .then(res => res.json())
+    .then(cats => {
+        cats.forEach(c => {
+            const o = document.createElement("option");
+            o.value = c;
+            o.textContent = c;
+            categoriasSelect.appendChild(o);
+        });
+    });
+
+categoriasSelect.onchange = () => {
+    categoriaActual = categoriasSelect.value;
+    modoBusqueda = false;
+    skip = 0;
+    cargarProductos();
+};
+
+cargarProductos();
