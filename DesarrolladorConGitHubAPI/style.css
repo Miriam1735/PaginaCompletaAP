@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: #f6f8fa;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px;
+}
+
+.perfil {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    height: fit-content;
+}
+
+.perfil img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.perfil h2 {
+    margin: 15px 0 5px;
+}
+
+.perfil p {
+    color: #57606a;
+    font-size: 14px;
+}
+
+.repos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+}
+
+.repo-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #d0d7de;
+}
+
+.repo-card h3 {
+    margin: 0;
+    color: #0969da;
+    font-size: 16px;
+}
+
+.repo-card p {
+    font-size: 13px;
+    color: #57606a;
+}
+
+.repo-card a {
+    font-size: 13px;
+    color: #0969da;
+    text-decoration: none;
+}
+
+.followers-grid {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.followers-grid img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid #d0d7de;
+}
+
+.barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e3a5f;
+    padding: 20px;
+    color: white;
+}
+
+.top-actions-left {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.header-left {
+    flex: 3;
+    text-align: center;
+}
+
+.top-actions-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-principal {
+    background-color: #d9534f;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-principal:hover {
+    background-color: #c9302c;
+}
