@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>NASA Explorer</title>
+    <link rel="stylesheet" href="style.css">
+    <div class="top-actions">
+        <!-- Botón para regresar a página principal -->
+        <a href="../index.html" class="btn btn-principal"> Página Principal</a>
+    </div>
+</head>
+<body>
+
+    <header>
+        <h1>NASA Explorer</h1>
+        <p>Explorando datos públicos de la NASA API</p>
+    </header>
+
+
+    <div id="menu">
+        <button id="btn-apod">Imagen del Día</button>
+        <button id="btn-apod-fecha">Buscar Imagen por Fecha</button>
+        <button id="btn-neo">Asteroides Cercanos</button>
+    </div>
+
+    <div id="buscador" style="display:none;">
+        <input type="date" id="fecha-input">
+        <button id="btn-buscar">Buscar</button>
+    </div>
+
+    <div id="contenido"></div>
+
+    <script src="ApiLibre.js"></script>
+</body>
+</html>
